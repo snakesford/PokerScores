@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Scores</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-container {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            border: 1px solid #444;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #b0b0b0;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border-radius: 3px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .scores-container {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #444;
+        }
+
+        .score-entry {
+            padding: 10px;
+            border-bottom: 1px solid #444;
+            display: grid;
+            grid-template-columns: 60px 1fr 150px;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .score-entry:last-child {
+            border-bottom: none;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .rank-badge.gold {
+            background-color: #FFD700;
+            color: #1a1a1a;
+        }
+
+        .rank-badge.silver {
+            background-color: #C0C0C0;
+            color: #1a1a1a;
+        }
+
+        .rank-badge.bronze {
+            background-color: #CD7F32;
+            color: white;
+        }
+
+        .positive {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .negative {
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .session-card {
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+            cursor: pointer;
+        }
+
+        .session-date {
+            font-weight: bold;
+            color: #4CAF50;
+            font-size: 16px;
+        }
+
+        .session-toggle {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .session-players {
+            display: grid;
+            grid-template-columns: 1fr 100px 120px;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .session-players-header {
+            font-weight: bold;
+            color: #888;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #444;
+            margin-bottom: 5px;
+        }
+
+        .session-player-row {
+            padding: 5px 0;
+        }
+
+        .score-entry-header {
+            font-weight: bold;
+            color: #4CAF50;
+            padding: 10px;
+            border-bottom: 2px solid #4CAF50;
+            display: grid;
+            grid-template-columns: 60px 1fr 150px;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .player-name {
+            color: #e0e0e0;
+        }
+
+        .chip-amount {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .running-total {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .total-display {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #1a1a1a;
+            border-radius: 3px;
+            border: 2px solid #4CAF50;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #888;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>POKER SCORES</h1>
+    
+    <div class="form-container">
+        <form id="scoreForm">
+            <div class="form-group">
+                <label for="sessionDate">Session Date:</label>
+                <input type="date" id="sessionDate" required>
+            </div>
+            <div class="form-group">
+                <label for="playerName">Player:</label>
+                <select id="playerName" required>
+                    <option value="">Select Player</option>
+                    <option value="Player 1">Player 1</option>
+                    <option value="Player 2">Player 2</option>
+                    <option value="Player 3">Player 3</option>
+                    <option value="Player 4">Player 4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="startingChips">Starting Chips (Buy-in):</label>
+                <input type="number" id="startingChips" required min="0" step="1">
+            </div>
+            <div class="form-group">
+                <label for="endingChips">Ending Chips:</label>
+                <input type="number" id="endingChips" required min="0" step="1">
+            </div>
+            <div class="form-group">
+                <label>Net Win/Loss:</label>
+                <input type="text" id="netAmount" readonly style="background-color: #333;">
+            </div>
+            <button type="submit">Add Session Entry</button>
+        </form>
+    </div>
+
+    <div class="scores-container">
+        <h2>Current Standings</h2>
+        <div class="score-entry-header">
+            <span>Rank</span>
+            <span>Player</span>
+            <span>Total Net</span>
+        </div>
+        <div id="standingsList"></div>
+    </div>
+
+    <div class="scores-container" style="margin-top: 30px;">
+        <h2>Session History</h2>
+        <div id="historyList"></div>
+    </div>
+
+    <script>
+        let sessions = []; // Array of session objects: { date, players: [{player, starting, ending, net}] }
+
+        // Set today's date as default
+        document.getElementById('sessionDate').valueAsDate = new Date();
+
+        // Calculate and display net amount in real-time
+        document.getElementById('startingChips').addEventListener('input', calculateNet);
+        document.getElementById('endingChips').addEventListener('input', calculateNet);
+
+        function calculateNet() {
+            const starting = parseInt(document.getElementById('startingChips').value) || 0;
+            const ending = parseInt(document.getElementById('endingChips').value) || 0;
+            const net = ending - starting;
+            const netInput = document.getElementById('netAmount');
+            
+            netInput.value = net >= 0 ? `+${net.toLocaleString()}` : net.toLocaleString();
+            netInput.className = net >= 0 ? 'positive' : 'negative';
+        }
+
+        // Load sessions from localStorage on page load
+        function loadSessions() {
+            const savedSessions = localStorage.getItem('pokerSessions');
+            if (savedSessions) {
+                sessions = JSON.parse(savedSessions);
+                displayAll();
+            }
+        }
+
+        // Save sessions to localStorage
+        function saveSessions() {
+            localStorage.setItem('pokerSessions', JSON.stringify(sessions));
+        }
+
+        // Calculate total net for each player across all sessions
+        function calculateTotals() {
+            const totals = {};
+            sessions.forEach(session => {
+                session.players.forEach(playerEntry => {
+                    if (!totals[playerEntry.player]) {
+                        totals[playerEntry.player] = 0;
+                    }
+                    totals[playerEntry.player] += playerEntry.net;
+                });
+            });
+            return totals;
+        }
+
+        // Display current standings
+        function displayStandings() {
+            const standingsList = document.getElementById('standingsList');
+            const totals = calculateTotals();
+            
+            if (Object.keys(totals).length === 0) {
+                standingsList.innerHTML = '<div class="empty-state">No scores yet. Add your first session entry above.</div>';
+                return;
+            }
+
+            // Sort players by total (descending)
+            const sortedPlayers = Object.entries(totals)
+                .sort((a, b) => b[1] - a[1]);
+
+            standingsList.innerHTML = '';
+            sortedPlayers.forEach(([player, total], index) => {
+                const entryDiv = document.createElement('div');
+                entryDiv.className = 'score-entry';
+                
+                // Determine rank badge class
+                let badgeClass = '';
+                if (index === 0) badgeClass = 'gold';
+                else if (index === 1) badgeClass = 'silver';
+                else if (index === 2) badgeClass = 'bronze';
+                
+                const rankDisplay = index < 3 
+                    ? `<span class="rank-badge ${badgeClass}">${index + 1}</span>`
+                    : `<span style="padding-left: 8px;">${index + 1}</span>`;
+                
+                const totalClass = total >= 0 ? 'positive' : 'negative';
+                const totalDisplay = total >= 0 ? `+${total.toLocaleString()}` : total.toLocaleString();
+                
+                entryDiv.innerHTML = `
+                    ${rankDisplay}
+                    <span class="player-name">${player}</span>
+                    <span class="${totalClass}">${totalDisplay}</span>
+                `;
+                standingsList.appendChild(entryDiv);
+            });
+        }
+
+        // Display session history
+        function displayHistory() {
+            const historyList = document.getElementById('historyList');
+            
+            if (sessions.length === 0) {
+                historyList.innerHTML = '<div class="empty-state">No sessions yet. Add your first session entry above.</div>';
+                return;
+            }
+
+            // Sort sessions by date (newest first)
+            const sortedSessions = [...sessions].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            historyList.innerHTML = '';
+            sortedSessions.forEach((session, sessionIndex) => {
+                const sessionCard = document.createElement('div');
+                sessionCard.className = 'session-card';
+                
+                // Format date
+                const dateObj = new Date(session.date);
+                const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                sessionCard.innerHTML = `
+                    <div class="session-header">
+                        <span class="session-date">${formattedDate}</span>
+                    </div>
+                    <div class="session-players">
+                        <div class="session-players-header">Player</div>
+                        <div class="session-players-header">Ending</div>
+                        <div class="session-players-header">Net</div>
+                        ${session.players.map(playerEntry => {
+                            const netClass = playerEntry.net >= 0 ? 'positive' : 'negative';
+                            const netDisplay = playerEntry.net >= 0 ? `+${playerEntry.net.toLocaleString()}` : playerEntry.net.toLocaleString();
+                            return `
+                                <div class="session-player-row">${playerEntry.player}</div>
+                                <div class="session-player-row">${playerEntry.ending.toLocaleString()}</div>
+                                <div class="session-player-row ${netClass}">${netDisplay}</div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+                historyList.appendChild(sessionCard);
+            });
+        }
+
+        // Display both standings and history
+        function displayAll() {
+            displayStandings();
+            displayHistory();
+        }
+
+        // Handle form submission
+        document.getElementById('scoreForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const date = document.getElementById('sessionDate').value;
+            const playerName = document.getElementById('playerName').value;
+            const startingChips = parseInt(document.getElementById('startingChips').value);
+            const endingChips = parseInt(document.getElementById('endingChips').value);
+
+            if (!date || !playerName || isNaN(startingChips) || isNaN(endingChips)) {
+                return;
+            }
+
+            const net = endingChips - startingChips;
+
+            // Find or create session for this date
+            let session = sessions.find(s => s.date === date);
+            
+            if (!session) {
+                session = { date, players: [] };
+                sessions.push(session);
+            }
+
+            // Check if player already has an entry for this session
+            const existingPlayerIndex = session.players.findIndex(p => p.player === playerName);
+            
+            if (existingPlayerIndex >= 0) {
+                // Update existing entry
+                session.players[existingPlayerIndex] = {
+                    player: playerName,
+                    starting: startingChips,
+                    ending: endingChips,
+                    net: net
+                };
+            } else {
+                // Add new player entry
+                session.players.push({
+                    player: playerName,
+                    starting: startingChips,
+                    ending: endingChips,
+                    net: net
+                });
+            }
+            
+            saveSessions();
+            displayAll();
+            
+            // Clear form
+            document.getElementById('playerName').value = '';
+            document.getElementById('startingChips').value = '';
+            document.getElementById('endingChips').value = '';
+            document.getElementById('netAmount').value = '';
+            document.getElementById('playerName').focus();
+        });
+
+        // Load sessions when page loads
+        loadSessions();
+    </script>
+</body>
+</html>
