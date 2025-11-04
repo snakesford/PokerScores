@@ -1,4 +1,15 @@
-        let sessions = []; // Array of session objects: { date, players: [{player, starting, ending, net}] }
+        let sessions = []; // Array of session objects: { id, date, players: [{player, starting, ending, net}] }
+
+        // Get the next unique ID for a session
+        function getNextSessionId() {
+            // Only consider sessions that have numeric IDs
+            const sessionsWithIds = sessions.filter(s => s.id != null && typeof s.id === 'number');
+            if (sessionsWithIds.length === 0) {
+                return 1;
+            }
+            const maxId = Math.max(...sessionsWithIds.map(s => s.id));
+            return maxId + 1;
+        }
 
         // Set today's date as default
         document.getElementById('sessionDate').valueAsDate = new Date();
@@ -39,24 +50,47 @@
             const savedSessions = localStorage.getItem('pokerSessions');
             if (savedSessions) {
                 sessions = JSON.parse(savedSessions);
+                // Don't modify existing records - load them exactly as stored
                 displayAll();
             }
         }
 
+        // Normalize session object property order (id first, then date, then players)
+        // This only reorders properties, it does NOT modify any values or IDs
+        function normalizeSession(session) {
+            // Create new object with properties in correct order
+            // Preserve all existing values exactly as they are
+            const normalized = {};
+            if (session.id !== undefined) normalized.id = session.id;
+            if (session.date !== undefined) normalized.date = session.date;
+            if (session.players !== undefined) normalized.players = session.players;
+            // Preserve any other properties that might exist
+            Object.keys(session).forEach(key => {
+                if (!['id', 'date', 'players'].includes(key)) {
+                    normalized[key] = session[key];
+                }
+            });
+            return normalized;
+        }
+
         // Save sessions to localStorage
         function saveSessions() {
-            localStorage.setItem('pokerSessions', JSON.stringify(sessions));
+            // Normalize all sessions before saving to ensure consistent property order
+            const normalizedSessions = sessions.map(normalizeSession);
+            localStorage.setItem('pokerSessions', JSON.stringify(normalizedSessions));
         }
 
         // Save sessions data to poker-sessions.json via server
         async function exportSessionsToJSON() {
             try {
+                // Normalize all sessions before saving to ensure consistent property order
+                const normalizedSessions = sessions.map(normalizeSession);
                 const response = await fetch('/api/save', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(sessions)
+                    body: JSON.stringify(normalizedSessions)
                 });
                 
                 const result = await response.json();
@@ -293,7 +327,11 @@
             let session = sessions.find(s => s.date === date);
             
             if (!session) {
-                session = { date, players: [] };
+                session = { 
+                    id: getNextSessionId(), 
+                    date, 
+                    players: [] 
+                };
                 sessions.push(session);
             }
 
