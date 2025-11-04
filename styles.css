@@ -101,6 +101,60 @@
             background-color: #da190b;
         }
 
+        .player-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .player-btn {
+            padding: 15px;
+            border: 2px solid #444;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+
+        .player-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .player-btn.selected {
+            border-width: 3px;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .player-btn.rank-1 {
+            background-color: #FFD700;
+            color: #1a1a1a;
+            border-color: #FFD700;
+        }
+
+        .player-btn.rank-2 {
+            background-color: #C0C0C0;
+            color: #1a1a1a;
+            border-color: #C0C0C0;
+        }
+
+        .player-btn.rank-3 {
+            background-color: #CD7F32;
+            color: white;
+            border-color: #CD7F32;
+        }
+
+        .player-btn.rank-4 {
+            background-color: #4a4a4a;
+            color: #e0e0e0;
+            border-color: #666;
+        }
+
         .scores-container {
             background-color: #2a2a2a;
             padding: 20px;

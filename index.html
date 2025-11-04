@@ -16,14 +16,14 @@
                 <input type="date" id="sessionDate" required>
             </div>
             <div class="form-group">
-                <label for="playerName">Player:</label>
-                <select id="playerName" required>
-                    <option value="">Select Player</option>
-                    <option value="Player 1">Player 1</option>
-                    <option value="Player 2">Player 2</option>
-                    <option value="Player 3">Player 3</option>
-                    <option value="Player 4">Player 4</option>
-                </select>
+                <label>Select Player:</label>
+                <div class="player-buttons">
+                    <button type="button" class="player-btn" data-player="Papa" id="playerBtn1">Papa</button>
+                    <button type="button" class="player-btn" data-player="Uncle B" id="playerBtn2">Uncle B</button>
+                    <button type="button" class="player-btn" data-player="Elliott" id="playerBtn3">Elliott</button>
+                    <button type="button" class="player-btn" data-player="Emmett" id="playerBtn4">Emmett</button>
+                </div>
+                <input type="hidden" id="playerName" required>
             </div>
             <div class="form-group">
                 <label for="startingChips">Starting Chips (Buy-in):</label>

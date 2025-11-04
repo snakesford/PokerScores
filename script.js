@@ -3,6 +3,18 @@
         // Set today's date as default
         document.getElementById('sessionDate').valueAsDate = new Date();
 
+        // Set up player button click handlers
+        document.querySelectorAll('.player-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove selected class from all buttons
+                document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('selected'));
+                // Add selected class to clicked button
+                this.classList.add('selected');
+                // Set the hidden input value
+                document.getElementById('playerName').value = this.getAttribute('data-player');
+            });
+        });
+
         // Calculate and display net amount in real-time
         document.getElementById('startingChips').addEventListener('input', calculateNet);
         document.getElementById('endingChips').addEventListener('input', calculateNet);
@@ -45,6 +57,55 @@
             return totals;
         }
 
+        // Update player button colors based on current standings
+        function updatePlayerButtonColors() {
+            const totals = calculateTotals();
+            
+            // Map player names to button IDs
+            const playerToButtonId = {
+                'Papa': 'playerBtn1',
+                'Uncle B': 'playerBtn2',
+                'Elliott': 'playerBtn3',
+                'Emmett': 'playerBtn4'
+            };
+            
+            // Remove all rank classes from buttons first
+            document.querySelectorAll('.player-btn').forEach(btn => {
+                btn.classList.remove('rank-1', 'rank-2', 'rank-3', 'rank-4');
+            });
+            
+            // Sort players by total (descending) to get ranks
+            const sortedPlayers = Object.entries(totals)
+                .sort((a, b) => b[1] - a[1])
+                .map(([player]) => player);
+            
+            // Apply rank classes based on standings
+            sortedPlayers.forEach((player, index) => {
+                const rank = index + 1;
+                const btnId = playerToButtonId[player];
+                if (btnId) {
+                    const btn = document.getElementById(btnId);
+                    if (btn) {
+                        btn.classList.add(`rank-${Math.min(rank, 4)}`); // Cap at rank 4
+                    }
+                }
+            });
+            
+            // Players with no entries get rank-4 (default)
+            const allPlayers = ['Papa', 'Uncle B', 'Elliott', 'Emmett'];
+            allPlayers.forEach(player => {
+                if (!sortedPlayers.includes(player)) {
+                    const btnId = playerToButtonId[player];
+                    if (btnId) {
+                        const btn = document.getElementById(btnId);
+                        if (btn) {
+                            btn.classList.add('rank-4');
+                        }
+                    }
+                }
+            });
+        }
+
         // Display current standings
         function displayStandings() {
             const standingsList = document.getElementById('standingsList');
@@ -52,6 +113,8 @@
             
             if (Object.keys(totals).length === 0) {
                 standingsList.innerHTML = '<div class="empty-state">No scores yet. Add your first session entry above.</div>';
+                // Still update button colors (all will be rank-4)
+                updatePlayerButtonColors();
                 return;
             }
 
@@ -84,6 +147,9 @@
                 `;
                 standingsList.appendChild(entryDiv);
             });
+            
+            // Update player button colors based on new standings
+            updatePlayerButtonColors();
         }
 
         // Display session history
@@ -192,7 +258,8 @@
             document.getElementById('startingChips').value = '';
             document.getElementById('endingChips').value = '';
             document.getElementById('netAmount').value = '';
-            document.getElementById('playerName').focus();
+            // Clear selected button
+            document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('selected'));
         });
 
         // Handle clear all data button
