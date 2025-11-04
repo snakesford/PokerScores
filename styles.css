@@ -1,0 +1,239 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-container {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            border: 1px solid #444;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #b0b0b0;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border-radius: 3px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .scores-container {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #444;
+        }
+
+        .score-entry {
+            padding: 10px;
+            border-bottom: 1px solid #444;
+            display: grid;
+            grid-template-columns: 60px 1fr 150px;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .score-entry:last-child {
+            border-bottom: none;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .rank-badge.gold {
+            background-color: #FFD700;
+            color: #1a1a1a;
+        }
+
+        .rank-badge.silver {
+            background-color: #C0C0C0;
+            color: #1a1a1a;
+        }
+
+        .rank-badge.bronze {
+            background-color: #CD7F32;
+            color: white;
+        }
+
+        .positive {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .negative {
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .session-card {
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+            cursor: pointer;
+        }
+
+        .session-date {
+            font-weight: bold;
+            color: #4CAF50;
+            font-size: 16px;
+        }
+
+        .session-toggle {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .session-players {
+            display: grid;
+            grid-template-columns: 1fr 100px 120px;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .session-players-header {
+            font-weight: bold;
+            color: #888;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #444;
+            margin-bottom: 5px;
+        }
+
+        .session-player-row {
+            padding: 5px 0;
+        }
+
+        .score-entry-header {
+            font-weight: bold;
+            color: #4CAF50;
+            padding: 10px;
+            border-bottom: 2px solid #4CAF50;
+            display: grid;
+            grid-template-columns: 60px 1fr 150px;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .player-name {
+            color: #e0e0e0;
+        }
+
+        .chip-amount {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .running-total {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .total-display {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #1a1a1a;
+            border-radius: 3px;
+            border: 2px solid #4CAF50;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #888;
+            padding: 20px;
+        }
