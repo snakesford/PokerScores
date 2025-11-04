@@ -5,13 +5,19 @@
 
         // Set up player button click handlers
         document.querySelectorAll('.player-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
                 // Remove selected class from all buttons
                 document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('selected'));
                 // Add selected class to clicked button
                 this.classList.add('selected');
                 // Set the hidden input value
                 document.getElementById('playerName').value = this.getAttribute('data-player');
+                // Return focus to ending chips field
+                const endingChipsInput = document.getElementById('endingChips');
+                if (endingChipsInput) {
+                    endingChipsInput.focus();
+                }
             });
         });
 
