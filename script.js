@@ -48,6 +48,28 @@
             localStorage.setItem('pokerSessions', JSON.stringify(sessions));
         }
 
+        // Save sessions data to poker-sessions.json via server
+        async function exportSessionsToJSON() {
+            try {
+                const response = await fetch('/api/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(sessions)
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    console.log('Data saved to poker-sessions.json');
+                } else {
+                    console.error('Error saving data:', result.error);
+                }
+            } catch (error) {
+                console.error('Error saving data to file:', error);
+            }
+        }
+
         // Calculate total net for each player across all sessions
         function calculateTotals() {
             const totals = {};
@@ -278,6 +300,9 @@
             
             saveSessions();
             displayAll();
+            
+            // Export data to poker-sessions.json file
+            exportSessionsToJSON();
             
             // Clear form
             document.getElementById('playerName').value = '';

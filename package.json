@@ -1,0 +1,13 @@
+{
+  "name": "poker-scores",
+  "version": "1.0.0",
+  "description": "Poker Scores Tracker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
