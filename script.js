@@ -296,5 +296,168 @@
             }
         });
 
+        // Handle JSON import
+        // document.getElementById('importJsonBtn').addEventListener('click', function() {
+        //     const fileInput = document.getElementById('jsonFileInput');
+        //     const file = fileInput.files[0];
+        //     const statusDiv = document.getElementById('importStatus');
+            
+        //     if (!file) {
+        //         statusDiv.textContent = 'Please select a JSON file';
+        //         statusDiv.className = 'import-status error';
+        //         return;
+        //     }
+            
+        //     const reader = new FileReader();
+        //     reader.onload = function(e) {
+        //         try {
+        //             const jsonData = JSON.parse(e.target.result);
+        //             const importData = Array.isArray(jsonData) ? jsonData : [jsonData];
+                    
+        //             let importedCount = 0;
+        //             const playerNames = ['Papa', 'Uncle B', 'Elliott', 'Emmett'];
+                    
+        //             importData.forEach(entry => {
+        //                 if (!entry.date || !entry.score || !Array.isArray(entry.score)) {
+        //                     throw new Error('Invalid JSON format. Expected {date: string, score: number[]}');
+        //                 }
+                        
+        //                 // Parse date from various formats
+        //                 let dateObj;
+        //                 try {
+        //                     const dateStr = entry.date.trim();
+                            
+        //                     // Try to parse the date string directly first
+        //                     dateObj = new Date(dateStr);
+        //                     if (isNaN(dateObj.getTime())) {
+        //                         // If direct parsing fails, try different formats
+                                
+        //                         // Format: "Tuesday October 28, 2025" or "October 28, 2025"
+        //                         let dateMatch = dateStr.match(/(\w+)\s+(\w+)\s+(\d+),\s+(\d+)/);
+        //                         if (dateMatch) {
+        //                             const [, , monthName, day, year] = dateMatch;
+        //                             const months = {
+        //                                 'January': 0, 'February': 1, 'March': 2, 'April': 3,
+        //                                 'May': 4, 'June': 5, 'July': 6, 'August': 7,
+        //                                 'September': 8, 'October': 9, 'November': 10, 'December': 11
+        //                             };
+        //                             const month = months[monthName];
+        //                             if (month !== undefined) {
+        //                                 dateObj = new Date(year, month, day);
+        //                             }
+        //                         }
+                                
+        //                         // If still no match, try format: "October 28, 2025" (without day name)
+        //                         if (!dateObj || isNaN(dateObj.getTime())) {
+        //                             dateMatch = dateStr.match(/(\w+)\s+(\d+),\s+(\d+)/);
+        //                             if (dateMatch) {
+        //                                 const [, monthName, day, year] = dateMatch;
+        //                                 const months = {
+        //                                     'January': 0, 'February': 1, 'March': 2, 'April': 3,
+        //                                     'May': 4, 'June': 5, 'July': 6, 'August': 7,
+        //                                     'September': 8, 'October': 9, 'November': 10, 'December': 11
+        //                                 };
+        //                                 const month = months[monthName];
+        //                                 if (month !== undefined) {
+        //                                     dateObj = new Date(year, month, day);
+        //                                 }
+        //                             }
+        //                         }
+                                
+        //                         // If date is just a year like "2024", default to January 1st of that year
+        //                         if (!dateObj || isNaN(dateObj.getTime())) {
+        //                             const yearMatch = dateStr.match(/^(\d{4})$/);
+        //                             if (yearMatch) {
+        //                                 const year = parseInt(yearMatch[1]);
+        //                                 if (year >= 1900 && year <= 2100) {
+        //                                     dateObj = new Date(year, 0, 1); // January 1st
+        //                                 }
+        //                             }
+        //                         }
+                                
+        //                         // If still can't parse, throw error
+        //                         if (!dateObj || isNaN(dateObj.getTime())) {
+        //                             throw new Error(`Could not parse date: "${entry.date}". Expected format like "October 28, 2025" or "Tuesday October 28, 2025"`);
+        //                         }
+        //                     }
+        //                 } catch (err) {
+        //                     throw new Error(`Date parsing error: ${err.message}`);
+        //                 }
+                        
+        //                 // Format date as YYYY-MM-DD
+        //                 const year = dateObj.getFullYear();
+        //                 const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+        //                 const day = String(dateObj.getDate()).padStart(2, '0');
+        //                 const dateStr = `${year}-${month}-${day}`;
+                        
+        //                 // Find or create session for this date
+        //                 let session = sessions.find(s => s.date === dateStr);
+        //                 if (!session) {
+        //                     session = { date: dateStr, players: [] };
+        //                     sessions.push(session);
+        //                 }
+                        
+        //                 // Add player entries for this session
+        //                 entry.score.forEach((endingChips, index) => {
+        //                     if (index < playerNames.length) {
+        //                         const playerName = playerNames[index];
+        //                         const net = endingChips - STARTING_CHIPS;
+                                
+        //                         // Check if player already has an entry for this session
+        //                         const existingIndex = session.players.findIndex(p => p.player === playerName);
+        //                         if (existingIndex >= 0) {
+        //                             // Update existing entry
+        //                             session.players[existingIndex] = {
+        //                                 player: playerName,
+        //                                 starting: STARTING_CHIPS,
+        //                                 ending: endingChips,
+        //                                 net: net
+        //                             };
+        //                         } else {
+        //                             // Add new entry
+        //                             session.players.push({
+        //                                 player: playerName,
+        //                                 starting: STARTING_CHIPS,
+        //                                 ending: endingChips,
+        //                                 net: net
+        //                             });
+        //                         }
+        //                     }
+        //                 });
+                        
+        //                 importedCount++;
+        //             });
+                    
+        //             // Save and refresh
+        //             saveSessions();
+        //             displayAll();
+                    
+        //             // Show success message
+        //             statusDiv.textContent = `Successfully imported ${importedCount} session(s)!`;
+        //             statusDiv.className = 'import-status success';
+                    
+        //             // Clear file input
+        //             fileInput.value = '';
+                    
+        //             // Clear status after 3 seconds
+        //             setTimeout(() => {
+        //                 statusDiv.textContent = '';
+        //                 statusDiv.className = 'import-status';
+        //             }, 3000);
+                    
+        //         } catch (error) {
+        //             statusDiv.textContent = `Error importing data: ${error.message}`;
+        //             statusDiv.className = 'import-status error';
+        //         }
+        //     };
+            
+        //     reader.onerror = function() {
+        //         statusDiv.textContent = 'Error reading file';
+        //         statusDiv.className = 'import-status error';
+        //     };
+            
+        //     reader.readAsText(file);
+        // });
+
         // Load sessions when page loads
         loadSessions();
