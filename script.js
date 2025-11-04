@@ -16,13 +16,12 @@
         });
 
         // Calculate and display net amount in real-time
-        document.getElementById('startingChips').addEventListener('input', calculateNet);
+        const STARTING_CHIPS = 500;
         document.getElementById('endingChips').addEventListener('input', calculateNet);
 
         function calculateNet() {
-            const starting = parseInt(document.getElementById('startingChips').value) || 0;
             const ending = parseInt(document.getElementById('endingChips').value) || 0;
-            const net = ending - starting;
+            const net = ending - STARTING_CHIPS;
             const netInput = document.getElementById('netAmount');
             
             netInput.value = net >= 0 ? `+${net.toLocaleString()}` : net.toLocaleString();
@@ -55,6 +54,20 @@
                 });
             });
             return totals;
+        }
+
+        // Calculate total chips for each player (sum of all ending chips)
+        function calculateTotalChips() {
+            const totalChips = {};
+            sessions.forEach(session => {
+                session.players.forEach(playerEntry => {
+                    if (!totalChips[playerEntry.player]) {
+                        totalChips[playerEntry.player] = 0;
+                    }
+                    totalChips[playerEntry.player] += playerEntry.ending;
+                });
+            });
+            return totalChips;
         }
 
         // Update player button colors based on current standings
@@ -110,6 +123,7 @@
         function displayStandings() {
             const standingsList = document.getElementById('standingsList');
             const totals = calculateTotals();
+            const totalChips = calculateTotalChips();
             
             if (Object.keys(totals).length === 0) {
                 standingsList.innerHTML = '<div class="empty-state">No scores yet. Add your first session entry above.</div>';
@@ -140,10 +154,13 @@
                 const totalClass = total >= 0 ? 'positive' : 'negative';
                 const totalDisplay = total >= 0 ? `+${total.toLocaleString()}` : total.toLocaleString();
                 
+                const playerTotalChips = totalChips[player] || 0;
+                
                 entryDiv.innerHTML = `
                     ${rankDisplay}
                     <span class="player-name">${player}</span>
                     <span class="${totalClass}">${totalDisplay}</span>
+                    <span class="chip-amount">${playerTotalChips.toLocaleString()}</span>
                 `;
                 standingsList.appendChild(entryDiv);
             });
@@ -212,10 +229,10 @@
             
             const date = document.getElementById('sessionDate').value;
             const playerName = document.getElementById('playerName').value;
-            const startingChips = parseInt(document.getElementById('startingChips').value);
+            const startingChips = STARTING_CHIPS;
             const endingChips = parseInt(document.getElementById('endingChips').value);
 
-            if (!date || !playerName || isNaN(startingChips) || isNaN(endingChips)) {
+            if (!date || !playerName || isNaN(endingChips)) {
                 return;
             }
 
@@ -255,7 +272,6 @@
             
             // Clear form
             document.getElementById('playerName').value = '';
-            document.getElementById('startingChips').value = '';
             document.getElementById('endingChips').value = '';
             document.getElementById('netAmount').value = '';
             // Clear selected button
