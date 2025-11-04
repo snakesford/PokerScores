@@ -200,6 +200,9 @@
                     day: 'numeric' 
                 });
                 
+                // Sort players by ending chips (highest first)
+                const sortedPlayers = [...session.players].sort((a, b) => b.ending - a.ending);
+                
                 sessionCard.innerHTML = `
                     <div class="session-header">
                         <span class="session-date">${formattedDate}</span>
@@ -208,7 +211,7 @@
                         <div class="session-players-header">Player</div>
                         <div class="session-players-header">Ending</div>
                         <div class="session-players-header">Net</div>
-                        ${session.players.map(playerEntry => {
+                        ${sortedPlayers.map(playerEntry => {
                             const netClass = playerEntry.net >= 0 ? 'positive' : 'negative';
                             const netDisplay = playerEntry.net >= 0 ? `+${playerEntry.net.toLocaleString()}` : playerEntry.net.toLocaleString();
                             return `
