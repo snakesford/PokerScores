@@ -1593,33 +1593,5 @@
         "net": -283
       }
     ]
-  },
-  {
-    "date": "2025-11-04",
-    "players": [
-      {
-        "player": "Papa",
-        "starting": 500,
-        "ending": 111111111111,
-        "net": 111111110611
-      },
-      {
-        "player": "Uncle B",
-        "starting": 500,
-        "ending": 111,
-        "net": -389
-      }
-    ]
-  },
-  {
-    "date": "2025-11-06",
-    "players": [
-      {
-        "player": "Papa",
-        "starting": 500,
-        "ending": 111,
-        "net": -389
-      }
-    ]
   }
 ]

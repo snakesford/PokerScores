@@ -228,6 +228,7 @@
                 sessionCard.innerHTML = `
                     <div class="session-header">
                         <span class="session-date">${formattedDate}</span>
+                        <button class="delete-session-btn" data-date="${session.date}" title="Delete this session">×</button>
                     </div>
                     <div class="session-players">
                         <div class="session-players-header">Player</div>
@@ -253,6 +254,25 @@
             displayStandings();
             displayHistory();
         }
+
+        // Handle delete session button clicks (using event delegation)
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('delete-session-btn')) {
+                const dateToDelete = e.target.getAttribute('data-date');
+                
+                if (confirm(`Are you sure you want to delete the session from ${new Date(dateToDelete).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}?`)) {
+                    // Remove session from array
+                    sessions = sessions.filter(s => s.date !== dateToDelete);
+                    
+                    // Save and refresh
+                    saveSessions();
+                    displayAll();
+                    
+                    // Export to JSON file
+                    exportSessionsToJSON();
+                }
+            }
+        });
 
         // Handle form submission
         document.getElementById('scoreForm').addEventListener('submit', function(e) {
