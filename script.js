@@ -195,5 +195,14 @@
             document.getElementById('playerName').focus();
         });
 
+        // Handle clear all data button
+        document.getElementById('clearAllData').addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete all session data? This cannot be undone.')) {
+                sessions = [];
+                localStorage.removeItem('pokerSessions');
+                displayAll();
+            }
+        });
+
         // Load sessions when page loads
         loadSessions();

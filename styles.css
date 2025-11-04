@@ -92,6 +92,15 @@
             background-color: #45a049;
         }
 
+        .clear-button {
+            background-color: #f44336;
+            margin-top: 15px;
+        }
+
+        .clear-button:hover {
+            background-color: #da190b;
+        }
+
         .scores-container {
             background-color: #2a2a2a;
             padding: 20px;
