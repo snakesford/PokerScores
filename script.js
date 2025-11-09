@@ -252,6 +252,19 @@
             // Sort sessions by date (newest first)
             //Stop trying to sort by id. Sorting by date is fine.
             const sortedSessions = [...sessions].sort((a, b) => {
+                const isAYearOnly2024 = a.date === '2024';
+                const isBYearOnly2024 = b.date === '2024';
+
+                if (isAYearOnly2024 && !isBYearOnly2024) {
+                    return 1; // Place bare 2024 sessions at the bottom
+                }
+                if (!isAYearOnly2024 && isBYearOnly2024) {
+                    return -1;
+                }
+                if (isAYearOnly2024 && isBYearOnly2024) {
+                    return 0;
+                }
+
                 // Handle year-only dates (e.g., "2024")
                 const isAYear = /^\d{4}$/.test(a.date);
                 const isBYear = /^\d{4}$/.test(b.date);
