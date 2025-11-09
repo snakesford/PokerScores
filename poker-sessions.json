@@ -1653,130 +1653,402 @@
     "id": 56,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 508,  "net": 8 },
-      { "player": "Uncle B",  "starting": 500, "ending": 308,  "net": -192 },
-      { "player": "Elliott",  "starting": 500, "ending": 446,  "net": -54 },
-      { "player": "Emmett",   "starting": 500, "ending": 716,  "net": 216 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 508,
+        "net": 8
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 308,
+        "net": -192
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 446,
+        "net": -54
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 716,
+        "net": 216
+      }
     ]
   },
   {
     "id": 57,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 374,  "net": -126 },
-      { "player": "Uncle B",  "starting": 500, "ending": 275,  "net": -225 },
-      { "player": "Elliott",  "starting": 500, "ending": 700,  "net": 200 },
-      { "player": "Emmett",   "starting": 500, "ending": 651,  "net": 151 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 374,
+        "net": -126
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 275,
+        "net": -225
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 700,
+        "net": 200
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 651,
+        "net": 151
+      }
     ]
   },
   {
     "id": 58,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 1045, "net": 545 },
-      { "player": "Uncle B",  "starting": 500, "ending": 326,  "net": -174 },
-      { "player": "Elliott",  "starting": 500, "ending": 325,  "net": -175 },
-      { "player": "Emmett",   "starting": 500, "ending": 404,  "net": -96 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 1045,
+        "net": 545
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 326,
+        "net": -174
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 325,
+        "net": -175
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 404,
+        "net": -96
+      }
     ]
   },
   {
     "id": 59,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 53,   "net": -447 },
-      { "player": "Uncle B",  "starting": 500, "ending": 500,  "net": 0 },
-      { "player": "Elliott",  "starting": 500, "ending": 1149, "net": 649 },
-      { "player": "Emmett",   "starting": 500, "ending": 298,  "net": -202 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 53,
+        "net": -447
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 500,
+        "net": 0
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 1149,
+        "net": 649
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 298,
+        "net": -202
+      }
     ]
   },
   {
     "id": 60,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 434,  "net": -66 },
-      { "player": "Uncle B",  "starting": 500, "ending": 340,  "net": -160 },
-      { "player": "Elliott",  "starting": 500, "ending": 988,  "net": 488 },
-      { "player": "Emmett",   "starting": 500, "ending": 238,  "net": -262 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 434,
+        "net": -66
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 340,
+        "net": -160
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 988,
+        "net": 488
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 238,
+        "net": -262
+      }
     ]
   },
   {
     "id": 61,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 985,  "net": 485 },
-      { "player": "Uncle B",  "starting": 500, "ending": 326,  "net": -174 },
-      { "player": "Elliott",  "starting": 500, "ending": 311,  "net": -189 },
-      { "player": "Emmett",   "starting": 500, "ending": 378,  "net": -122 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 985,
+        "net": 485
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 326,
+        "net": -174
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 311,
+        "net": -189
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 378,
+        "net": -122
+      }
     ]
   },
   {
     "id": 62,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 478,  "net": -22 },
-      { "player": "Uncle B",  "starting": 500, "ending": 500,  "net": 0 },
-      { "player": "Elliott",  "starting": 500, "ending": 229,  "net": -271 },
-      { "player": "Emmett",   "starting": 500, "ending": 793,  "net": 293 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 478,
+        "net": -22
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 500,
+        "net": 0
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 229,
+        "net": -271
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 793,
+        "net": 293
+      }
     ]
   },
   {
     "id": 63,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 412,  "net": -88 },
-      { "player": "Uncle B",  "starting": 500, "ending": 815,  "net": 315 },
-      { "player": "Elliott",  "starting": 500, "ending": 452,  "net": -48 },
-      { "player": "Emmett",   "starting": 500, "ending": 321,  "net": -179 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 412,
+        "net": -88
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 815,
+        "net": 315
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 452,
+        "net": -48
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 321,
+        "net": -179
+      }
     ]
   },
   {
     "id": 64,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 508,  "net": 8 },
-      { "player": "Uncle B",  "starting": 500, "ending": 500,  "net": 0 },
-      { "player": "Elliott",  "starting": 500, "ending": 403,  "net": -97 },
-      { "player": "Emmett",   "starting": 500, "ending": 591,  "net": 91 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 508,
+        "net": 8
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 500,
+        "net": 0
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 403,
+        "net": -97
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 591,
+        "net": 91
+      }
     ]
   },
   {
     "id": 65,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 259,  "net": -241 },
-      { "player": "Uncle B",  "starting": 500, "ending": 385,  "net": -115 },
-      { "player": "Elliott",  "starting": 500, "ending": 272,  "net": -228 },
-      { "player": "Emmett",   "starting": 500, "ending": 1172, "net": 672 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 259,
+        "net": -241
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 385,
+        "net": -115
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 272,
+        "net": -228
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 1172,
+        "net": 672
+      }
     ]
   },
   {
     "id": 66,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 300,  "net": -200 },
-      { "player": "Uncle B",  "starting": 500, "ending": 500,  "net": 0 },
-      { "player": "Elliott",  "starting": 500, "ending": 260,  "net": -240 },
-      { "player": "Emmett",   "starting": 500, "ending": 940,  "net": 440 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 300,
+        "net": -200
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 500,
+        "net": 0
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 260,
+        "net": -240
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 940,
+        "net": 440
+      }
     ]
   },
   {
     "id": 67,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 522,  "net": 22 },
-      { "player": "Uncle B",  "starting": 500, "ending": 588,  "net": 88 },
-      { "player": "Elliott",  "starting": 500, "ending": 342,  "net": -158 },
-      { "player": "Emmett",   "starting": 500, "ending": 664,  "net": 164 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 522,
+        "net": 22
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 588,
+        "net": 88
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 342,
+        "net": -158
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 664,
+        "net": 164
+      }
     ]
   },
   {
     "id": 68,
     "date": "2024",
     "players": [
-      { "player": "Papa",     "starting": 500, "ending": 296,  "net": -204 },
-      { "player": "Uncle B",  "starting": 500, "ending": 500,  "net": 0 },
-      { "player": "Elliott",  "starting": 500, "ending": 987,  "net": 487 },
-      { "player": "Emmett",   "starting": 500, "ending": 217,  "net": -283 }
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 296,
+        "net": -204
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 500,
+        "net": 0
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 987,
+        "net": 487
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 217,
+        "net": -283
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "date": "2025-11-09",
+    "players": [
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 1,
+        "net": -499
+      }
     ]
   }
 ]
