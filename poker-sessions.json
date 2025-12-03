@@ -2068,5 +2068,35 @@
         "net": 0
       }
     ]
+  },
+  {
+    "id": 70,
+    "date": "2025-12-03",
+    "players": [
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 808,
+        "net": 308
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 393,
+        "net": -107
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 483,
+        "net": -17
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 316,
+        "net": -184
+      }
+    ]
   }
 ]
