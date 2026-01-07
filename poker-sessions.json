@@ -2158,5 +2158,59 @@
         "net": -81
       }
     ]
+  },
+  {
+    "id": 73,
+    "date": "2026-01-07",
+    "players": [
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 522,
+        "net": 22
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 500,
+        "net": 0
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 361,
+        "net": -139
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 617,
+        "net": 117
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "date": "2025-12-31",
+    "players": [
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 202,
+        "net": -298
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 436,
+        "net": -64
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 1067,
+        "net": 567
+      }
+    ]
   }
 ]
