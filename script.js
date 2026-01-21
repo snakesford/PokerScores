@@ -362,6 +362,69 @@
             return totals;
         }
 
+        function formatSessionDate(dateStr) {
+            if (/^\d{4}$/.test(dateStr)) {
+                return dateStr;
+            }
+            const dateObj = new Date(dateStr);
+            if (!isNaN(dateObj.getTime())) {
+                return dateObj.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+            }
+            return dateStr;
+        }
+
+        function displayTopBottomSessions() {
+            const topSessions = document.getElementById('topSessions');
+            const bottomSessions = document.getElementById('bottomSessions');
+
+            const entries = [];
+            sessions.forEach(session => {
+                session.players.forEach(playerEntry => {
+                    entries.push({
+                        date: session.date,
+                        player: playerEntry.player,
+                        net: playerEntry.net,
+                        ending: playerEntry.ending
+                    });
+                });
+            });
+
+            if (entries.length === 0) {
+                topSessions.innerHTML = '<div class="empty-state">No sessions yet.</div>';
+                bottomSessions.innerHTML = '<div class="empty-state">No sessions yet.</div>';
+                return;
+            }
+
+            const sortedHigh = [...entries].sort((a, b) => b.net - a.net).slice(0, 5);
+            const sortedLow = [...entries].sort((a, b) => a.net - b.net).slice(0, 5);
+
+            const renderList = (list, container) => {
+                container.innerHTML = '';
+                list.forEach(entry => {
+                    const row = document.createElement('div');
+                    row.className = 'top-bottom-row';
+
+                    const netClass = entry.net >= 0 ? 'positive' : 'negative';
+                    const netDisplay = entry.net >= 0 ? `+${entry.net.toLocaleString()}` : entry.net.toLocaleString();
+
+                    row.innerHTML = `
+                        <span>${entry.player}</span>
+                        <span class="top-bottom-date">${formatSessionDate(entry.date)}</span>
+                        <span>${entry.ending.toLocaleString()}</span>
+                        <span class="${netClass}">${netDisplay}</span>
+                    `;
+                    container.appendChild(row);
+                });
+            };
+
+            renderList(sortedHigh, topSessions);
+            renderList(sortedLow, bottomSessions);
+        }
+
         function displayYearlyTally() {
             const yearlyTally = document.getElementById('yearlyTally');
             const yearlyTotals = calculateYearlyTotals();
@@ -468,6 +531,7 @@
         function displayAll() {
             displayStandings();
             displayYearlyTally();
+            displayTopBottomSessions();
             displayHistory();
         }
 

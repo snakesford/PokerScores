@@ -216,7 +216,7 @@
 
         .yearly-rows {
             display: grid;
-            grid-template-columns: 1fr auto;
+            grid-template-columns: 1fr 120px;
             gap: 8px 12px;
             align-items: center;
         }
@@ -230,6 +230,58 @@
 
         .yearly-row {
             font-size: 14px;
+        }
+
+        .yearly-rows-header:nth-child(2),
+        .yearly-row:nth-child(2n) {
+            text-align: right;
+        }
+
+        .top-bottom-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .top-bottom-title {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .top-bottom-row,
+        .top-bottom-header {
+            display: grid;
+            grid-template-columns: 1fr auto 90px 90px;
+            gap: 10px;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #3a3a3a;
+            font-size: 14px;
+        }
+
+        .top-bottom-header {
+            color: #b0b0b0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #3a3a3a;
+        }
+
+        .top-bottom-row:last-child {
+            border-bottom: none;
+        }
+
+        .top-bottom-date {
+            color: #b0b0b0;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 700px) {
+            .top-bottom-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .scores-container {
