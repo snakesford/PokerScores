@@ -199,6 +199,39 @@
             border-color: #666;
         }
 
+        .yearly-card {
+            background-color: #232323;
+            border: 1px solid #3a3a3a;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .yearly-header {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .yearly-rows {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px 12px;
+            align-items: center;
+        }
+
+        .yearly-rows-header {
+            color: #b0b0b0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .yearly-row {
+            font-size: 14px;
+        }
+
         .scores-container {
             background-color: #2a2a2a;
             padding: 20px;

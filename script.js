@@ -240,6 +240,77 @@
             updatePlayerButtonColors();
         }
 
+        function getSessionYear(dateStr) {
+            if (/^\d{4}$/.test(dateStr)) {
+                return dateStr;
+            }
+            if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                return dateStr.slice(0, 4);
+            }
+            const parsed = new Date(dateStr);
+            if (!isNaN(parsed.getTime())) {
+                return String(parsed.getFullYear());
+            }
+            return null;
+        }
+
+        function calculateYearlyTotals() {
+            const totals = {};
+            sessions.forEach(session => {
+                const year = getSessionYear(session.date);
+                if (!year) {
+                    return;
+                }
+                if (!totals[year]) {
+                    totals[year] = {};
+                }
+                session.players.forEach(playerEntry => {
+                    if (!totals[year][playerEntry.player]) {
+                        totals[year][playerEntry.player] = 0;
+                    }
+                    totals[year][playerEntry.player] += playerEntry.net;
+                });
+            });
+            return totals;
+        }
+
+        function displayYearlyTally() {
+            const yearlyTally = document.getElementById('yearlyTally');
+            const yearlyTotals = calculateYearlyTotals();
+            const years = Object.keys(yearlyTotals).sort((a, b) => parseInt(b, 10) - parseInt(a, 10));
+
+            if (years.length === 0) {
+                yearlyTally.innerHTML = '<div class="empty-state">No yearly totals yet.</div>';
+                return;
+            }
+
+            yearlyTally.innerHTML = '';
+            years.forEach(year => {
+                const yearCard = document.createElement('div');
+                yearCard.className = 'yearly-card';
+
+                const sortedPlayers = Object.entries(yearlyTotals[year])
+                    .sort((a, b) => b[1] - a[1]);
+
+                yearCard.innerHTML = `
+                    <div class="yearly-header">${year}</div>
+                    <div class="yearly-rows">
+                        <div class="yearly-rows-header">Player</div>
+                        <div class="yearly-rows-header">Net</div>
+                        ${sortedPlayers.map(([player, total]) => {
+                            const totalClass = total >= 0 ? 'positive' : 'negative';
+                            const totalDisplay = total >= 0 ? `+${total.toLocaleString()}` : total.toLocaleString();
+                            return `
+                                <div class="yearly-row">${player}</div>
+                                <div class="yearly-row ${totalClass}">${totalDisplay}</div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+                yearlyTally.appendChild(yearCard);
+            });
+        }
+
         // Display session history
         function displayHistory() {
             const historyList = document.getElementById('historyList');
@@ -349,6 +420,7 @@
         // Display both standings and history
         function displayAll() {
             displayStandings();
+            displayYearlyTally();
             displayHistory();
         }
 
