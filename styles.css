@@ -210,15 +210,18 @@
         .yearly-header {
             font-weight: bold;
             color: #4CAF50;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-size: 16px;
+            text-align: center;
         }
 
         .yearly-rows {
             display: grid;
-            grid-template-columns: 1fr 120px;
-            gap: 8px 12px;
+            grid-template-columns: 1fr auto;
+            gap: 8px 16px;
             align-items: center;
+            max-width: 360px;
+            margin: 0 auto;
         }
 
         .yearly-rows-header {
@@ -226,16 +229,20 @@
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #3a3a3a;
         }
 
         .yearly-row {
             font-size: 14px;
+            padding: 2px 0;
         }
 
         .yearly-rows-header:nth-child(2),
         .yearly-row:nth-child(2n) {
             text-align: right;
         }
+
 
         .top-bottom-grid {
             display: grid;
