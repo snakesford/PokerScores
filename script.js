@@ -141,6 +141,90 @@
             return totalChips;
         }
 
+        function sortSessionsByDateDesc(list) {
+            return [...list].sort((a, b) => {
+                const isAYearOnly2024 = a.date === '2024';
+                const isBYearOnly2024 = b.date === '2024';
+
+                if (isAYearOnly2024 && !isBYearOnly2024) {
+                    return 1;
+                }
+                if (!isAYearOnly2024 && isBYearOnly2024) {
+                    return -1;
+                }
+                if (isAYearOnly2024 && isBYearOnly2024) {
+                    return 0;
+                }
+
+                const isAYear = /^\d{4}$/.test(a.date);
+                const isBYear = /^\d{4}$/.test(b.date);
+
+                if (isAYear && isBYear) {
+                    return parseInt(b.date) - parseInt(a.date);
+                } else if (isAYear) {
+                    const aYear = parseInt(a.date);
+                    const bYear = new Date(b.date).getFullYear();
+                    if (aYear !== bYear) {
+                        return bYear - aYear;
+                    }
+                    return -1;
+                } else if (isBYear) {
+                    const aYear = new Date(a.date).getFullYear();
+                    const bYear = parseInt(b.date);
+                    if (aYear !== bYear) {
+                        return bYear - aYear;
+                    }
+                    return 1;
+                } else {
+                    return new Date(b.date) - new Date(a.date);
+                }
+            });
+        }
+
+        function calculateCurrentStreaks() {
+            const streaks = {};
+            const sortedSessions = sortSessionsByDateDesc(sessions);
+            const players = new Set();
+
+            sessions.forEach(session => {
+                session.players.forEach(playerEntry => players.add(playerEntry.player));
+            });
+
+            players.forEach(player => {
+                let streakType = null;
+                let count = 0;
+
+                for (const session of sortedSessions) {
+                    const entry = session.players.find(p => p.player === player);
+                    if (!entry) {
+                        continue;
+                    }
+
+                    const result = entry.net > 0 ? 'win' : entry.net < 0 ? 'loss' : 'neutral';
+                    if (result === 'neutral') {
+                        break;
+                    }
+                    if (streakType === null) {
+                        streakType = result;
+                        count = 1;
+                        continue;
+                    }
+                    if (result === streakType) {
+                        count += 1;
+                    } else {
+                        break;
+                    }
+                }
+
+                streaks[player] = {
+                    win: streakType === 'win' ? count : 0,
+                    loss: streakType === 'loss' ? count : 0
+                };
+            });
+
+            return streaks;
+        }
+
         // Update player button colors based on current standings
         function updatePlayerButtonColors() {
             const totals = calculateTotals();
@@ -195,6 +279,7 @@
             const standingsList = document.getElementById('standingsList');
             const totals = calculateTotals();
             const totalChips = calculateTotalChips();
+            const streaks = calculateCurrentStreaks();
             
             if (Object.keys(totals).length === 0) {
                 standingsList.innerHTML = '<div class="empty-state">No scores yet. Add your first session entry above.</div>';
@@ -226,12 +311,15 @@
                 const totalDisplay = total >= 0 ? `+${total.toLocaleString()}` : total.toLocaleString();
                 
                 const playerTotalChips = totalChips[player] || 0;
+                const playerStreak = streaks[player] || { win: 0, loss: 0 };
                 
                 entryDiv.innerHTML = `
                     ${rankDisplay}
                     <span class="player-name">${player}</span>
                     <span class="${totalClass}">${totalDisplay}</span>
                     <span class="chip-amount">${playerTotalChips.toLocaleString()}</span>
+                    <span class="positive">${playerStreak.win ? playerStreak.win : '-'}</span>
+                    <span class="negative">${playerStreak.loss ? playerStreak.loss : '-'}</span>
                 `;
                 standingsList.appendChild(entryDiv);
             });
@@ -322,48 +410,7 @@
 
             // Sort sessions by date (newest first)
             //Stop trying to sort by id. Sorting by date is fine.
-            const sortedSessions = [...sessions].sort((a, b) => {
-                const isAYearOnly2024 = a.date === '2024';
-                const isBYearOnly2024 = b.date === '2024';
-
-                if (isAYearOnly2024 && !isBYearOnly2024) {
-                    return 1; // Place bare 2024 sessions at the bottom
-                }
-                if (!isAYearOnly2024 && isBYearOnly2024) {
-                    return -1;
-                }
-                if (isAYearOnly2024 && isBYearOnly2024) {
-                    return 0;
-                }
-
-                // Handle year-only dates (e.g., "2024")
-                const isAYear = /^\d{4}$/.test(a.date);
-                const isBYear = /^\d{4}$/.test(b.date);
-                
-                if (isAYear && isBYear) {
-                    // Both are years - compare numerically
-                    return parseInt(b.date) - parseInt(a.date);
-                } else if (isAYear) {
-                    // a is a year, b is a full date - years come before specific dates of that year
-                    const aYear = parseInt(a.date);
-                    const bYear = new Date(b.date).getFullYear();
-                    if (aYear !== bYear) {
-                        return bYear - aYear;
-                    }
-                    return -1; // Year-only comes before specific dates
-                } else if (isBYear) {
-                    // b is a year, a is a full date
-                    const aYear = new Date(a.date).getFullYear();
-                    const bYear = parseInt(b.date);
-                    if (aYear !== bYear) {
-                        return bYear - aYear;
-                    }
-                    return 1; // Specific dates come after year-only
-                } else {
-                    // Both are full dates
-                    return new Date(b.date) - new Date(a.date);
-                }
-            });
+            const sortedSessions = sortSessionsByDateDesc(sessions);
 
             historyList.innerHTML = '';
             sortedSessions.forEach((session, sessionIndex) => {
