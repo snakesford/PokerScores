@@ -278,7 +278,7 @@
         .top-bottom-row,
         .top-bottom-header {
             display: grid;
-            grid-template-columns: 1fr auto 90px;
+            grid-template-columns: 1fr auto auto;
             gap: 10px;
             align-items: center;
             padding: 8px 0;
@@ -302,6 +302,17 @@
             color: #e0e0e0;
             font-size: 12px;
             white-space: nowrap;
+        }
+
+        .top-bottom-date-year {
+            margin-right: 8px;
+        }
+
+        .top-bottom-row > :last-child,
+        .top-bottom-header > :last-child {
+            justify-self: end;
+            text-align: right;
+            padding-left: 8px;
         }
 
         .top-bottom-link {

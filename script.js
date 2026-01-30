@@ -429,7 +429,7 @@
             const sortedHigh = [...entries].sort((a, b) => b.net - a.net).slice(0, 5);
             const sortedLow = [...entries].sort((a, b) => a.net - b.net).slice(0, 5);
 
-            const renderList = (list, container, endingClass, highlightTopRanks) => {
+            const renderList = (list, container, endingClass, highlightTopRanks, applyYearSpacing) => {
                 container.innerHTML = '';
                 list.forEach((entry, index) => {
                     const row = document.createElement('div');
@@ -437,10 +437,11 @@
                     const rankClass = highlightTopRanks ? `rank-name-${index + 1}` : '';
                     const sessionAnchorId = getSessionAnchorId(entry.date);
                     const sessionKey = `${normalizeKeyPart(entry.date)}|${normalizeKeyPart(entry.player)}|${normalizeKeyPart(entry.ending)}`;
+                    const dateExtraClass = applyYearSpacing && /^\d{4}$/.test(entry.date) ? 'top-bottom-date-year' : '';
 
                     row.innerHTML = `
                         <span class="${rankClass}">${entry.player}</span>
-                        <button class="top-bottom-date top-bottom-link" data-session-id="${sessionAnchorId}" data-session-key="${sessionKey}" type="button">
+                        <button class="top-bottom-date top-bottom-link ${dateExtraClass}" data-session-id="${sessionAnchorId}" data-session-key="${sessionKey}" type="button">
                             ${formatSessionDate(entry.date)}
                         </button>
                         <span class="${endingClass}">${entry.ending.toLocaleString()}</span>
@@ -449,8 +450,8 @@
                 });
             };
 
-            renderList(sortedHigh, topSessions, 'ending-positive', true);
-            renderList(sortedLow, bottomSessions, 'ending-negative', true);
+            renderList(sortedHigh, topSessions, 'ending-positive', true, false);
+            renderList(sortedLow, bottomSessions, 'ending-negative', true, true);
         }
 
         function displayYearlyTally() {
