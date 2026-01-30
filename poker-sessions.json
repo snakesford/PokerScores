@@ -2210,6 +2210,12 @@
         "starting": 500,
         "ending": 1067,
         "net": 567
+      },
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 500,
+        "net": 0
       }
     ]
   },
