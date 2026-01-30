@@ -402,27 +402,24 @@
             const sortedHigh = [...entries].sort((a, b) => b.net - a.net).slice(0, 5);
             const sortedLow = [...entries].sort((a, b) => a.net - b.net).slice(0, 5);
 
-            const renderList = (list, container) => {
+            const renderList = (list, container, endingClass, highlightTopRanks) => {
                 container.innerHTML = '';
-                list.forEach(entry => {
+                list.forEach((entry, index) => {
                     const row = document.createElement('div');
                     row.className = 'top-bottom-row';
-
-                    const netClass = entry.net >= 0 ? 'positive' : 'negative';
-                    const netDisplay = entry.net >= 0 ? `+${entry.net.toLocaleString()}` : entry.net.toLocaleString();
+                    const rankClass = highlightTopRanks ? `rank-name-${index + 1}` : '';
 
                     row.innerHTML = `
-                        <span>${entry.player}</span>
+                        <span class="${rankClass}">${entry.player}</span>
                         <span class="top-bottom-date">${formatSessionDate(entry.date)}</span>
-                        <span>${entry.ending.toLocaleString()}</span>
-                        <span class="${netClass}">${netDisplay}</span>
+                        <span class="${endingClass}">${entry.ending.toLocaleString()}</span>
                     `;
                     container.appendChild(row);
                 });
             };
 
-            renderList(sortedHigh, topSessions);
-            renderList(sortedLow, bottomSessions);
+            renderList(sortedHigh, topSessions, 'ending-positive', true);
+            renderList(sortedLow, bottomSessions, 'ending-negative', true);
         }
 
         function displayYearlyTally() {
