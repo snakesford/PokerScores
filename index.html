@@ -23,7 +23,12 @@
         </div>
 
         <div class="column column-right">
-            <div class="form-container score-form">
+            <div class="form-toggle">
+                <button id="toggleSessionForm" type="button" aria-expanded="false" aria-controls="sessionFormContainer">
+                    Show Session Form
+                </button>
+            </div>
+            <div class="form-container score-form is-hidden" id="sessionFormContainer">
                 <form id="scoreForm">
                     <div class="form-group">
                         <label for="sessionDate">Session Date:</label>

@@ -14,6 +14,17 @@
         // Set today's date as default
         document.getElementById('sessionDate').valueAsDate = new Date();
 
+        const toggleSessionFormBtn = document.getElementById('toggleSessionForm');
+        const sessionFormContainer = document.getElementById('sessionFormContainer');
+
+        if (toggleSessionFormBtn && sessionFormContainer) {
+            toggleSessionFormBtn.addEventListener('click', () => {
+                const isHidden = sessionFormContainer.classList.toggle('is-hidden');
+                toggleSessionFormBtn.textContent = isHidden ? 'Show Session Form' : 'Hide Session Form';
+                toggleSessionFormBtn.setAttribute('aria-expanded', String(!isHidden));
+            });
+        }
+
         // Set up player button click handlers
         document.querySelectorAll('.player-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {

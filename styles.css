@@ -30,6 +30,14 @@
             gap: 30px;
         }
 
+        .form-toggle {
+            margin-bottom: -10px;
+        }
+
+        .is-hidden {
+            display: none;
+        }
+
         .form-container {
             background-color: #2a2a2a;
             padding: 20px;
