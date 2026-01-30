@@ -377,6 +377,14 @@
             return dateStr;
         }
 
+        function normalizeKeyPart(value) {
+            return String(value).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        }
+
+        function getSessionAnchorId(dateStr) {
+            return `session-${normalizeKeyPart(dateStr)}`;
+        }
+
         function displayTopBottomSessions() {
             const topSessions = document.getElementById('topSessions');
             const bottomSessions = document.getElementById('bottomSessions');
@@ -408,10 +416,14 @@
                     const row = document.createElement('div');
                     row.className = 'top-bottom-row';
                     const rankClass = highlightTopRanks ? `rank-name-${index + 1}` : '';
+                    const sessionAnchorId = getSessionAnchorId(entry.date);
+                    const sessionKey = `${normalizeKeyPart(entry.date)}|${normalizeKeyPart(entry.player)}|${normalizeKeyPart(entry.ending)}`;
 
                     row.innerHTML = `
                         <span class="${rankClass}">${entry.player}</span>
-                        <span class="top-bottom-date">${formatSessionDate(entry.date)}</span>
+                        <button class="top-bottom-date top-bottom-link" data-session-id="${sessionAnchorId}" data-session-key="${sessionKey}" type="button">
+                            ${formatSessionDate(entry.date)}
+                        </button>
                         <span class="${endingClass}">${entry.ending.toLocaleString()}</span>
                     `;
                     container.appendChild(row);
@@ -476,6 +488,7 @@
             sortedSessions.forEach((session, sessionIndex) => {
                 const sessionCard = document.createElement('div');
                 sessionCard.className = 'session-card';
+                sessionCard.id = getSessionAnchorId(session.date);
                 
                 // Format date - if it's just a year (4 digits), display as just the year
                 let formattedDate;
@@ -512,8 +525,9 @@
                         ${sortedPlayers.map(playerEntry => {
                             const netClass = playerEntry.net >= 0 ? 'positive' : 'negative';
                             const netDisplay = playerEntry.net >= 0 ? `+${playerEntry.net.toLocaleString()}` : playerEntry.net.toLocaleString();
+                            const sessionKey = `${normalizeKeyPart(session.date)}|${normalizeKeyPart(playerEntry.player)}|${normalizeKeyPart(playerEntry.ending)}`;
                             return `
-                                <div class="session-player-row">${playerEntry.player}</div>
+                                <div class="session-player-row session-player-name" data-session-key="${sessionKey}">${playerEntry.player}</div>
                                 <div class="session-player-row">${playerEntry.ending.toLocaleString()}</div>
                                 <div class="session-player-row ${netClass}">${netDisplay}</div>
                             `;
@@ -534,6 +548,23 @@
 
         // Handle delete session button clicks (using event delegation)
         document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('top-bottom-link')) {
+                const sessionId = e.target.getAttribute('data-session-id');
+                const sessionKey = e.target.getAttribute('data-session-key');
+                let target = sessionKey
+                    ? document.querySelector(`.session-player-name[data-session-key="${sessionKey}"]`)
+                    : null;
+                if (!target && sessionId) {
+                    target = document.getElementById(sessionId);
+                }
+                if (target) {
+                    const sessionCard = target.closest('.session-card') || target;
+                    sessionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    sessionCard.classList.add('session-highlight');
+                    setTimeout(() => sessionCard.classList.remove('session-highlight'), 1200);
+                }
+                return;
+            }
             if (e.target.classList.contains('delete-session-btn')) {
                 const dateToDelete = e.target.getAttribute('data-date');
                 
