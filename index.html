@@ -9,92 +9,98 @@
 <body>
     <h1>POKER SCORES</h1>
     
-    <div class="form-container">
-        <form id="scoreForm">
-            <div class="form-group">
-                <label for="sessionDate">Session Date:</label>
-                <input type="date" id="sessionDate" required>
+    <div class="page-grid">
+        <div class="column column-left">
+            <div class="scores-container yearly-tally">
+                <h2>Yearly Tally</h2>
+                <div id="yearlyTally"></div>
             </div>
-            <div class="form-group">
-                <label>Select Player:</label>
-                <div class="player-buttons">
-                    <button type="button" class="player-btn" data-player="Papa" id="playerBtn1">Papa</button>
-                    <button type="button" class="player-btn" data-player="Uncle B" id="playerBtn2">Uncle B</button>
-                    <button type="button" class="player-btn" data-player="Elliott" id="playerBtn3">Elliott</button>
-                    <button type="button" class="player-btn" data-player="Emmett" id="playerBtn4">Emmett</button>
+
+            <div class="scores-container session-history">
+                <h2>Session History</h2>
+                <div id="historyList"></div>
+            </div>
+        </div>
+
+        <div class="column column-right">
+            <div class="form-container score-form">
+                <form id="scoreForm">
+                    <div class="form-group">
+                        <label for="sessionDate">Session Date:</label>
+                        <input type="date" id="sessionDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Player:</label>
+                        <div class="player-buttons">
+                            <button type="button" class="player-btn" data-player="Papa" id="playerBtn1">Papa</button>
+                            <button type="button" class="player-btn" data-player="Uncle B" id="playerBtn2">Uncle B</button>
+                            <button type="button" class="player-btn" data-player="Elliott" id="playerBtn3">Elliott</button>
+                            <button type="button" class="player-btn" data-player="Emmett" id="playerBtn4">Emmett</button>
+                        </div>
+                        <input type="hidden" id="playerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endingChips">Ending Chips:</label>
+                        <input type="number" id="endingChips" required min="0" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Net Win/Loss:</label>
+                        <input type="text" id="netAmount" readonly style="background-color: #333;">
+                    </div>
+                    <button type="submit">Add Session Entry</button>
+                </form>
+                <!-- <button id="clearAllData" class="clear-button">Clear All Data</button> -->
+            </div>
+
+            <!-- <div class="form-container">
+                <h3>Import Data from JSON</h3>
+                <div class="form-group">
+                    <label for="jsonFileInput">Upload JSON File:</label>
+                    <input type="file" id="jsonFileInput" accept=".json" />
+                    <button type="button" id="importJsonBtn" class="import-button">Import JSON</button>
                 </div>
-                <input type="hidden" id="playerName" required>
-            </div>
-            <div class="form-group">
-                <label for="endingChips">Ending Chips:</label>
-                <input type="number" id="endingChips" required min="0" step="1">
-            </div>
-            <div class="form-group">
-                <label>Net Win/Loss:</label>
-                <input type="text" id="netAmount" readonly style="background-color: #333;">
-            </div>
-            <button type="submit">Add Session Entry</button>
-        </form>
-        <!-- <button id="clearAllData" class="clear-button">Clear All Data</button> -->
-    </div>
+                <div id="importStatus" class="import-status"></div>
+            </div> -->
 
-    <!-- <div class="form-container">
-        <h3>Import Data from JSON</h3>
-        <div class="form-group">
-            <label for="jsonFileInput">Upload JSON File:</label>
-            <input type="file" id="jsonFileInput" accept=".json" />
-            <button type="button" id="importJsonBtn" class="import-button">Import JSON</button>
-        </div>
-        <div id="importStatus" class="import-status"></div>
-    </div> -->
-
-    <div class="scores-container">
-        <h2>Current Standings</h2>
-        <div class="score-entry-header">
-            <span>Rank</span>
-            <span>Player</span>
-            <span>Total Net</span>
-            <span>Total Chips</span>
-            <span>Win Streak</span>
-            <span>Loss Streak</span>
-        </div>
-        <div id="standingsList"></div>
-    </div>
-
-    <div class="scores-container" style="margin-top: 30px;">
-        <h2>Yearly Tally</h2>
-        <div id="yearlyTally"></div>
-    </div>
-
-    <div class="scores-container" style="margin-top: 30px;">
-        <h2>Single-Session Highs & Lows</h2>
-        <div class="top-bottom-grid">
-            <div>
-                <div class="top-bottom-title">Top 5</div>
-                <div class="top-bottom-header">
+            <div class="scores-container standings">
+                <h2>Current Standings</h2>
+                <div class="score-entry-header">
+                    <span>Rank</span>
                     <span>Player</span>
-                    <span>Date</span>
-                    <span>Ending</span>
-                    <span>Net</span>
+                    <span>Total Net</span>
+                    <span>Total Chips</span>
+                    <span>Win Streak</span>
+                    <span>Loss Streak</span>
                 </div>
-                <div id="topSessions"></div>
+                <div id="standingsList"></div>
             </div>
-            <div>
-                <div class="top-bottom-title">Bottom 5</div>
-                <div class="top-bottom-header">
-                    <span>Player</span>
-                    <span>Date</span>
-                    <span>Ending</span>
-                    <span>Net</span>
+
+            <div class="scores-container highs-lows">
+                <h2>Single-Session Highs & Lows</h2>
+                <div class="top-bottom-grid">
+                    <div>
+                        <div class="top-bottom-title">Top 5</div>
+                        <div class="top-bottom-header">
+                            <span>Player</span>
+                            <span>Date</span>
+                            <span>Ending</span>
+                            <span>Net</span>
+                        </div>
+                        <div id="topSessions"></div>
+                    </div>
+                    <div>
+                        <div class="top-bottom-title">Bottom 5</div>
+                        <div class="top-bottom-header">
+                            <span>Player</span>
+                            <span>Date</span>
+                            <span>Ending</span>
+                            <span>Net</span>
+                        </div>
+                        <div id="bottomSessions"></div>
+                    </div>
                 </div>
-                <div id="bottomSessions"></div>
             </div>
         </div>
-    </div>
-
-    <div class="scores-container" style="margin-top: 30px;">
-        <h2>Session History</h2>
-        <div id="historyList"></div>
     </div>
 
     <script src="script.js"></script>

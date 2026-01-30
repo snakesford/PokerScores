@@ -19,6 +19,17 @@
             text-align: center;
         }
 
+        .page-grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
         .form-container {
             background-color: #2a2a2a;
             padding: 20px;
@@ -456,4 +467,24 @@
             text-align: center;
             color: #888;
             padding: 20px;
+        }
+
+        @media (min-width: 1200px) {
+            body {
+                max-width: 1200px;
+            }
+
+            .page-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                align-items: start;
+            }
+
+            .page-grid .form-container,
+            .page-grid .scores-container {
+                margin-bottom: 0;
+            }
+
+            .page-grid .scores-container {
+                margin-top: 0 !important;
+            }
         }
