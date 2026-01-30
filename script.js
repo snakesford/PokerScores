@@ -303,23 +303,31 @@
                 else if (index === 1) badgeClass = 'silver';
                 else if (index === 2) badgeClass = 'bronze';
                 
-                const rankDisplay = index < 3 
-                    ? `<span class="rank-badge ${badgeClass}">${index + 1}</span>`
-                    : `<span style="padding-left: 8px;">${index + 1}</span>`;
+                const rankDisplay = index < 3
+                    ? `<span class="rank-cell"><span class="rank-badge ${badgeClass}">${index + 1}</span></span>`
+                    : `<span class="rank-cell"><span class="rank-text">${index + 1}</span></span>`;
                 
                 const totalClass = total >= 0 ? 'positive' : 'negative';
                 const totalDisplay = total >= 0 ? `+${total.toLocaleString()}` : total.toLocaleString();
                 
                 const playerTotalChips = totalChips[player] || 0;
                 const playerStreak = streaks[player] || { win: 0, loss: 0 };
+                let streakClass = '';
+                let streakDisplay = '-';
+                if (playerStreak.win > 0) {
+                    streakClass = 'positive';
+                    streakDisplay = playerStreak.win.toLocaleString();
+                } else if (playerStreak.loss > 0) {
+                    streakClass = 'negative';
+                    streakDisplay = `-${playerStreak.loss.toLocaleString()}`;
+                }
                 
                 entryDiv.innerHTML = `
                     ${rankDisplay}
                     <span class="player-name">${player}</span>
                     <span class="${totalClass}">${totalDisplay}</span>
                     <span class="chip-amount">${playerTotalChips.toLocaleString()}</span>
-                    <span class="positive">${playerStreak.win ? playerStreak.win : '-'}</span>
-                    <span class="negative">${playerStreak.loss ? playerStreak.loss : '-'}</span>
+                    <span class="${streakClass}">${streakDisplay}</span>
                 `;
                 standingsList.appendChild(entryDiv);
             });

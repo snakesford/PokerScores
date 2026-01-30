@@ -332,7 +332,7 @@
             padding: 10px;
             border-bottom: 1px solid #444;
             display: grid;
-            grid-template-columns: 60px 1fr 140px 140px 110px 110px;
+            grid-template-columns: 60px 1fr 120px 120px 90px;
             gap: 10px;
             align-items: center;
         }
@@ -486,9 +486,30 @@
             padding: 10px;
             border-bottom: 2px solid #4CAF50;
             display: grid;
-            grid-template-columns: 60px 1fr 140px 140px 110px 110px;
+            grid-template-columns: 60px 1fr 120px 120px 90px;
             gap: 10px;
             margin-bottom: 10px;
+        }
+
+        .standings .score-entry,
+        .standings .score-entry-header {
+            justify-items: start;
+        }
+
+        .standings .score-entry > span:nth-child(1),
+        .standings .score-entry-header > span:nth-child(1) {
+            justify-self: center;
+        }
+
+        .standings .score-entry > span:nth-child(3),
+        .standings .score-entry > span:nth-child(4),
+        .standings .score-entry > span:nth-child(5),
+        .standings .score-entry-header > span:nth-child(3),
+        .standings .score-entry-header > span:nth-child(4),
+        .standings .score-entry-header > span:nth-child(5) {
+            justify-self: end;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
         }
 
         .player-name {
@@ -519,6 +540,15 @@
             text-align: center;
             color: #888;
             padding: 20px;
+        }
+
+        @media (max-width: 1200px) {
+            .standings .score-entry,
+            .standings .score-entry-header {
+                grid-template-columns: 50px minmax(100px, 1fr) 110px 110px 90px;
+                gap: 8px;
+                font-size: 13px;
+            }
         }
 
         @media (min-width: 1200px) {
