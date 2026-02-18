@@ -2368,5 +2368,35 @@
         "net": 406
       }
     ]
+  },
+  {
+    "id": 80,
+    "date": "2026-02-18",
+    "players": [
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 668,
+        "net": 168
+      },
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 451,
+        "net": -49
+      },
+      {
+        "player": "Uncle B",
+        "starting": 500,
+        "ending": 500,
+        "net": 0
+      },
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 381,
+        "net": -119
+      }
+    ]
   }
 ]
