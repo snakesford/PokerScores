@@ -2428,5 +2428,29 @@
         "net": 5
       }
     ]
+  },
+  {
+    "id": 82,
+    "date": "2026-03-18",
+    "players": [
+      {
+        "player": "Emmett",
+        "starting": 500,
+        "ending": 56,
+        "net": -444
+      },
+      {
+        "player": "Elliott",
+        "starting": 500,
+        "ending": 744,
+        "net": 244
+      },
+      {
+        "player": "Papa",
+        "starting": 500,
+        "ending": 735,
+        "net": 235
+      }
+    ]
   }
 ]
